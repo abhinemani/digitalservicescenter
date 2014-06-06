@@ -5,10 +5,10 @@
     <title>Sheetsee Table Demo</title>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
     <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js'></script>
-    <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400,700,400italic'>
     <script type='text/javascript' src='js/tabletop.js'></script>
     <script type='text/javascript' src='js/sheetsee.js'></script>
-    <link rel='stylesheet' type='text/css' href='css/style.css'>
+    <script src="js/foundation.min.js"></script>
+    <link rel='stylesheet' type='text/css' href='css/foundation.css'>
   </head>
   <style>
     #Pagination {border-top: 1px solid #efefef; margin: 10px 0px; padding-top: 10px; display: inline-block;}
@@ -21,39 +21,70 @@
     #photogrid {overflow: auto;}
   </style>
 <body>
-  <div class="container">
-    <h1>Open City Map</h1>
+  <nav class="top-bar" data-topbar>
+    <ul class="title-area">
+      <li class="name">
+        <h1><a href="#">Open City Map</a></h1>
+      </li>
+      <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+    </ul>
+
+    <section class="top-bar-section">
+      <!-- Right Nav Section -->
+      <ul class="right">
+        <li class="active"><a href="#">Right Button Active</a></li>
+        <li class="has-dropdown">
+          <a href="#">Right Button Dropdown</a>
+          <ul class="dropdown">
+            <li><a href="#">First link in dropdown</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <!-- Left Nav Section -->
+      <!--<ul class="left">
+        <li><a href="#">Left Nav Button</a></li>
+      </ul>-->
+    </section>
+  </nav>  
+  <div class="row">
+    <div class="large-12 columns">
+    	<div class="panel">
+        <h3>Tracking open cities</h3>
+        <p>Easily find out if your city is open, and if it is, get access to the information it's providing in one, centralized, up-to-date place.</p>
+        <!--<div class="row">
+        	<div class="large-4 medium-4 columns">
+    		<p><a href="http://foundation.zurb.com/docs">Foundation Documentation</a><br />Everything you need to know about using the framework.</p>
+    	</div>
+        	<div class="large-4 medium-4 columns">
+        		<p><a href="http://github.com/zurb/foundation">Foundation on Github</a><br />Latest code, issue reports, feature requests and more.</p>
+        	</div>
+        	<div class="large-4 medium-4 columns">
+        		<p><a href="http://twitter.com/foundationzurb">@foundationzurb</a><br />Ping us on Twitter if you have questions. If you build something with this we'd love to see it (and send you a totally boss sticker).</p>
+        	</div>        
+				</div>-->
+    	</div>
+    </div>
+  </div>    
     <div id="photogrid"></div>
-    <footer>
-      <h4 id="getting-started">Getting Started</h4>
-      <ul>
-        <li><a href="../docs/about.html">About Sheetsee</a></li>
-      </ul>
-      <h4 id="ideas">Ideas</h4>
-      <ul>
-        <li><a href="../docs/fork-n-go.html">Fork-n-Go</a></li>
-      </ul>
-      <h4>Demos</h4>
-      <ul>
-        <li><a href="./demo-table.html">Table Demo</a></li>
-      </ul>
-      <h4 id="use">Use</h4>
-      <ul>
-        <li><a href="../docs/sheetsee-core.html">Sheetsee-core</a></li>
-      </ul>
-      <h4 id="use">Contact</h4>
-      <ul>
-        <li><a href="http://www.twitter.com/jllord">@jllord</a></li>
-      </ul>
-      <h4><a href="http://jlord.github.io/sheetsee.js">Home Page</a></h4>
-    </footer>
+    
 </div>
-
-
 
 <script id="photogrid" type="text/html">
   {{#rows}}
-      <h2>{{city}}</h2><ul><li><a href='{{data}}'>Data</a></li><li><a href='{{budget}}'>Budget</a></li><li><a href='{{laws}}'>Laws</a></li><li><a href='{{foia}}'>FOIA</a></li></ul>
+      <div class="row">
+        <div class="large-12 columns">
+          <h2 class='large button'>{{city}}</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="large-12 columns">
+         <a class='secondary button small' href='{{data}}'>Data</a>
+         <a class='secondary button small' href='{{budget}}'>Budget</a>
+         <a class='secondary button small' href='{{laws}}'>Laws</a>
+         <a class='secondary button small' href='{{foia}}'>FOIA</a>
+        </div>
+      </div>
   {{/rows}}
 </script>
 
@@ -69,6 +100,8 @@
   }
 
 </script>
-
+<script>
+  $(document).foundation();
+</script>
 </body>
 </html>
