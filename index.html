@@ -2,16 +2,17 @@
 <html>
   <head>
     <meta charset='utf-8'>
-    <title>Digital City on the Go</title>
+    <title>Open City Map</title>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
+    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js'></script>
+    
     <script type='text/javascript' src='js/tabletop.js'></script>
     <script type='text/javascript' src='js/sheetsee.js'></script>
-    
-    <script type='text/javascript' src='js/vendor/modernizr.js'></script>    
+
     <link rel='stylesheet' type='text/css' href='css/foundation.css'>
     <link rel='stylesheet' type='text/css' href='css/icons/foundation-icons.css'>
     <link rel='stylesheet' type='text/css' href='http://api.tiles.mapbox.com/mapbox.js/v1.0.0/mapbox.css'  />
-    <style>
+<link href='http://fonts.googleapis.com/css?family=Raleway:400,700,100,200,300,500,600,800,900' rel='stylesheet' type='text/css'>    <style>
       #map {max-width: 1000px; height: 350px;}
       .leaflet-popup-content li {list-style:none;}
       .leaflet-popup-content {width: 102px;}
@@ -27,7 +28,7 @@
   <nav class="top-bar" data-topbar>
     <ul class="title-area">
       <li class="name">
-        <h1><a href="#">Digital City on the Go</a></h1>
+        <h1><a href="#">Open City Map</a></h1>
       </li>
       <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
     </ul>
@@ -140,23 +141,21 @@
   function showInfo(data) {
     var html = Sheetsee.ich.photogrid({'rows': data})
     $('#photogrid').html(html)
+    var optionsJSON = ["city"]
+    var template = "<ul><li><a href='cities.html#{{city}}'>{{city}}</li></ul>"
+    var geoJSON = Sheetsee.createGeoJSON(data, optionsJSON)
+    var map = Sheetsee.loadMap("map")
+    Sheetsee.addTileLayer(map, 'examples.map-20v6611k')
+    var markerLayer = Sheetsee.addMarkerLayer(geoJSON, map, template)
     $('#photogrid a').each(function() {
         if($(this).attr('href') === '' || $(this).text() === 'N/A') {
             $(this).addClass("disabled");
         }
     });
-       var optionsJSON = ["city", "rowNumber"]
-       var template = "<ul><li><a href=#city{{rowNumber}}>{{city}}</a></li></ul>"
-       var geoJSON = Sheetsee.createGeoJSON(data, optionsJSON)
-       var map = Sheetsee.loadMap("map")
-       Sheetsee.addTileLayer(map, 'examples.map-20v6611k')
-        var markerLayer = Sheetsee.addMarkerLayer(geoJSON, map, template)
      }
   </script>
 
-<script type='text/javascript' src='js/vendor/jquery.js'></script>
-<script src='js/vendor/fastclick.js'></script>
-<script src="js/foundation.min.js"></script>
+    <script src="js/foundation.min.js"></script>
 
 <script>
   $(document).foundation();
