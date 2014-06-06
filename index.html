@@ -21,6 +21,7 @@
     #photogrid {overflow: auto;}
   </style>
 <body>
+
   <nav class="top-bar" data-topbar>
     <ul class="title-area">
       <li class="name">
@@ -52,6 +53,7 @@
     	<div class="panel">
         <h3>Tracking open cities</h3>
         <p>Easily find out if your city is open, and if it is, get access to the information it's providing in one, centralized, up-to-date place.</p>
+       
         <!--<div class="row">
         	<div class="large-4 medium-4 columns">
     		<p><a href="http://foundation.zurb.com/docs">Foundation Documentation</a><br />Everything you need to know about using the framework.</p>
@@ -74,19 +76,26 @@
   {{#rows}}
       <div class="row">
         <div class="large-12 columns">
-          <h2 class='large button'>{{city}}</h2>
-        </div>
-      </div>
-      <div class="row">
-        <div class="large-12 columns">
-         <a class='secondary button small' href='{{data}}'>Data</a>
-         <a class='secondary button small' href='{{budget}}'>Budget</a>
-         <a class='secondary button small' href='{{laws}}'>Laws</a>
-         <a class='secondary button small' href='{{foia}}'>FOIA</a>
+          <ul class="pricing-table">
+            <li class="title">{{city}}</li>
+            <li class="price"><div class="progress large-# success round">
+              <span class="meter" style="width: {{progress}}%"></span>
+            </div></li>
+            <li class="description">{{notes}}</li>
+            <li class="bullet-item"><a href='{{data}}'>Data</a></li>
+            <li class="bullet-item"><a href='{{budget}}'>Budget</a></li>
+            <li class="bullet-item"><a href='{{laws}}'>Laws</a></li>
+            <li class="bullet-item"><a href='{{foia}}'>FOIA</a></li>
+            <li class="cta-button"><a class="button" href="#">Permalink</a></li>
+          </ul>
+     
         </div>
       </div>
   {{/rows}}
 </script>
+
+  <script>  $(document).foundation();
+  </script>
 
 <script type="text/javascript">
   document.addEventListener('DOMContentLoaded', function() {
@@ -100,8 +109,6 @@
   }
 
 </script>
-<script>
-  $(document).foundation();
-</script>
+
 </body>
 </html>
