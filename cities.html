@@ -122,7 +122,7 @@
     $('#photogrid').html(html)
     $('#photogrid a').each(function() {
         if($(this).attr('href') === '' || $(this).text() === 'N/A') {
-            $(this).addClass("secondary");
+            $(this).addClass("disabled");
         }
     });
     
