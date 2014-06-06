@@ -8,6 +8,8 @@
     <script type='text/javascript' src='js/tabletop.js'></script>
     <script type='text/javascript' src='js/sheetsee.js'></script>
     <script src="js/foundation.min.js"></script>
+    <script src="js/foundation/foundation.equalizer.js"></script>
+    
     <link rel='stylesheet' type='text/css' href='css/foundation.css'>
     <link rel='stylesheet' type='text/css' href='http://api.tiles.mapbox.com/mapbox.js/v1.0.0/mapbox.css'  />
     <style>
@@ -67,22 +69,25 @@
     	</div>
     </div>
   </div>
-    <div class="row">
-      <div class="large-12 columns">
-       <div class="container">
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="container">
         <div id="map"></div>
       </div>
     </div>
-  </div>  
-    <div id="photogrid"></div>
-    
+  </div>
+  <br />  <br />  
+  <div id="photogrid"></div>
+  
+
 </div>
 
 <script id="photogrid" type="text/html">
-         {{#rows}}      <div class="row">
+       <div class="row" data-equalizer>
  
+         {{#rows}}     
 
-        <div class="large-12 columns">
+        <div class="large-4 columns" data-equalizer-watch>
           <ul class="pricing-table">
             <li class="title">{{city}}</li>
             <li class="price"><div class="progress large-# {{status}} round">
@@ -94,8 +99,8 @@
           </ul>
      
         </div>
-  </div>
-  {{/rows}}    
+ 
+  {{/rows}}   </div>  
 </script>
 
   <script>  $(document).foundation();
@@ -106,10 +111,16 @@
   	var URL = "1FhOYwOu1w14e_4qwKLsLoZYpd3hJu8Q3wSiZi5kwFMA"
   	Tabletop.init( { key: URL, callback: showInfo, simpleSheet: true, orderby: 'name' } )
   })
+  
 
   function showInfo(data) {
     var html = Sheetsee.ich.photogrid({'rows': data})
     $('#photogrid').html(html)
+    $('#photogrid a').each(function() {
+        if($(this).attr('href') === '' || $(this).text() === '') {
+            $(this).addClass("secondary");
+        }
+    });
        var optionsJSON = ["city"]
        var template = "<ul><li><h4>{{city}}</h4></li></ul>"
        var geoJSON = Sheetsee.createGeoJSON(data, optionsJSON)
@@ -117,6 +128,7 @@
        Sheetsee.addTileLayer(map, 'examples.map-20v6611k')
         var markerLayer = Sheetsee.addMarkerLayer(geoJSON, map, template)
      }
+
   </script>
 
 </script>
