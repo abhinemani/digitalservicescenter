@@ -2,12 +2,14 @@
 <html>
   <head>
     <meta charset='utf-8'>
-    <title>Digital City on the Go</title>
+    <title>Sheetsee Table Demo</title>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
+    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js'></script>
     <script type='text/javascript' src='js/tabletop.js'></script>
     <script type='text/javascript' src='js/sheetsee.js'></script>
+    <script src="js/foundation.min.js"></script>
+    <script src="js/foundation/foundation.equalizer.js"></script>
     
-    <script type='text/javascript' src='js/vendor/modernizr.js'></script>    
     <link rel='stylesheet' type='text/css' href='css/foundation.css'>
     <link rel='stylesheet' type='text/css' href='css/icons/foundation-icons.css'>
     <link rel='stylesheet' type='text/css' href='http://api.tiles.mapbox.com/mapbox.js/v1.0.0/mapbox.css'  />
@@ -26,7 +28,7 @@
   <nav class="top-bar" data-topbar>
     <ul class="title-area">
       <li class="name">
-        <h1><a href="#">Digital City on the Go</a></h1>
+        <h1><a href="#">Digital Cities Map</a></h1>
       </li>
       <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
     </ul>
@@ -52,35 +54,20 @@
   <div class="row">
     <div class="large-12 columns">
     	<div class="panel">
-        <h3>Want to connect with your city online? Here's how.</h3>
+        <h3>Connect with your open city</h3>
         <p>Easily find out if your city is open, and if it is, get access to the information it's providing in one, centralized, up-to-date place.</p>
        
-        <div class="row">
+        <!--<div class="row">
         	<div class="large-4 medium-4 columns">
-            <h5>Learn about your city</h5>
-            <ul>
-              <li><i class="fi-layout size-21"></i> Bills (Laws)</a></li>
-              <li><i class="fi-map size-21"></i> Bullets (Crime)</a></li>
-              <li><i class="fi-graph-trend size-21"></i> Budgets (Spending)</a></li>
-              <li><i class="fi-compass size-21"></i> Buses (Transit)</li>
-            </ul>
+    		<p><a href="http://foundation.zurb.com/docs">The Data that Matters</a><br />Everything you need to know about using the framework.</p>
     	</div>
         	<div class="large-4 medium-4 columns">
-            <h5>Interact with it</h5>
-            <ul>
-             <li><i class="fi-map size-21"></i> 211: Find social services</li>
-             <li><i class="fi-torsos-male-female size-21"></i> 311: Report a problem</li>
-             <li><i class="fi-magnifying-glass size-21"></i> 411: Ask a question</li>
-             <li><i class="fi-web size-21"></i> Data: Explore open data</li>             
-            </ul>
+        		<p><a href="http://github.com/zurb/foundation">Emphasis on standards</a><br />Latest code, issue reports, feature requests and more.</p>
         	</div>
         	<div class="large-4 medium-4 columns">
-        		<p>This is a collaborative, open database. Don't see your city listed?</p>
-              <a class="button alert small" href="https://docs.google.com/forms/d/1qh8sI68arfB-vXQyh1saK9ld-uuE-hUHYhSIaWBy1CA/viewform">Add your city</a>
-              <a class="button secondary small" href="https://docs.google.com/spreadsheets/d/1FhOYwOu1w14e_4qwKLsLoZYpd3hJu8Q3wSiZi5kwFMA/edit#gid=0">Explore the data</a>
-              
+        		<p><a href="/add">Add your city</a><br />Ping us on Twitter if you have questions. If you build something with this we'd love to see it (and send you a totally boss sticker).</p>
         	</div>        
-				</div>
+				</div>-->
     	</div>
     </div>
   </div>
@@ -109,18 +96,12 @@
               <span class="meter" style="width: {{progress}}%"></span>
             </div></li>            
             <li class="cta-button">
-              <a  class="button small" title="Bills"  href='{{bills}}'><i class="fi-layout size-21"></i></a>
-              <a class="button small" href='{{bullets}}'><i class="fi-map size-21"></i></a>
-              <a class="button small" href='{{budgets}}'><i class="fi-graph-trend size-21"></i></a>
-              <a class="button small" href='{{buses}}'><i class="fi-compass size-21"></i></a>
+              <a class="button small" href='{{laws}}'><i class="fi-layout size-21"></i></a>
+              <a class="button small" href='{{services}}'><i class="fi-map size-21"></i></a>
+              <a class="button small" href='{{data}}'><i class="fi-graph-trend size-21"></i></a>
+              <a class="button small" href='{{feedback}}'><i class="fi-mobile-signal size-21"></i></a>
             </li>
-           <li class="cta-button">
-             <a class="button small" href='{{services}}' title='Find a Social Service'><i class="fi-torsos-male-female size-21"></i></a>
-             <a class="button small" href='{{issues}}' title='Report an Issue'><i class="fi-trash size-21"></i></a>
-             <a class="button small" href='{{questions}}' title='Ask a question'><i class="fi-magnifying-glass size-21"></i></a>
-             <a class="button small" href='{{data}}' title='{{data}}'><i class="fi-web size-21"></i></a>
-             
-           </li>
+           
           </ul>
      
         </div>
@@ -128,6 +109,8 @@
   {{/rows}}   </div>  
 </script>
 
+  <script>  $(document).foundation();
+  </script>
 
 <script type="text/javascript">
   document.addEventListener('DOMContentLoaded', function() {
@@ -151,14 +134,9 @@
        Sheetsee.addTileLayer(map, 'examples.map-20v6611k')
         var markerLayer = Sheetsee.addMarkerLayer(geoJSON, map, template)
      }
+
   </script>
 
-<script type='text/javascript' src='js/vendor/jquery.js'></script>
-<script src='js/vendor/fastclick.js'></script>
-<script src="js/foundation.min.js"></script>
-
-<script>
-  $(document).foundation();
 </script>
 
 </body>
