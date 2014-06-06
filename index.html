@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <title>Sheetsee Table Demo</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
+    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js'></script>
+    <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400,700,400italic'>
+    <script type='text/javascript' src='js/tabletop.js'></script>
+    <script type='text/javascript' src='js/sheetsee.js'></script>
+    <link rel='stylesheet' type='text/css' href='css/style.css'>
+  </head>
+  <style>
+    #Pagination {border-top: 1px solid #efefef; margin: 10px 0px; padding-top: 10px; display: inline-block;}
+    #Pagination a {cursor: hand;}
+    .no-pag {color: #acacac; border: none;}
+    .no-pag:hover {color: #acacac;}
+    input {border: none; border-bottom: 1px solid #333;margin: 10px 0px; width: 200px; font-size: 16px; padding-bottom: 6px;}
+    .tHeader {padding: 8px; font-family: Helvetica Neue; Helvetica, Arial, sans-serif; cursor: hand;}
+    .photo {display: inline-block; float: left; width: 100px;}
+    #photogrid {overflow: auto;}
+  </style>
+<body>
+  <div class="container">
+    <h1>Open City Map</h1>
+    <div id="photogrid"></div>
+    <footer>
+      <h4 id="getting-started">Getting Started</h4>
+      <ul>
+        <li><a href="../docs/about.html">About Sheetsee</a></li>
+      </ul>
+      <h4 id="ideas">Ideas</h4>
+      <ul>
+        <li><a href="../docs/fork-n-go.html">Fork-n-Go</a></li>
+      </ul>
+      <h4>Demos</h4>
+      <ul>
+        <li><a href="./demo-table.html">Table Demo</a></li>
+      </ul>
+      <h4 id="use">Use</h4>
+      <ul>
+        <li><a href="../docs/sheetsee-core.html">Sheetsee-core</a></li>
+      </ul>
+      <h4 id="use">Contact</h4>
+      <ul>
+        <li><a href="http://www.twitter.com/jllord">@jllord</a></li>
+      </ul>
+      <h4><a href="http://jlord.github.io/sheetsee.js">Home Page</a></h4>
+    </footer>
+</div>
+
+
+
+<script id="photogrid" type="text/html">
+  {{#rows}}
+      <h2>{{city}}</h2><ul><li><a href='{{data}}'>Data</a></li><li><a href='{{budget}}'>Budget</a></li><li><a href='{{laws}}'>Laws</a></li><li><a href='{{foia}}'>FOIA</a></li></ul>
+  {{/rows}}
+</script>
+
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function() {
+  	var URL = "1FhOYwOu1w14e_4qwKLsLoZYpd3hJu8Q3wSiZi5kwFMA"
+  	Tabletop.init( { key: URL, callback: showInfo, simpleSheet: true } )
+  })
+
+  function showInfo(data) {
+    var html = Sheetsee.ich.photogrid({'rows': data})
+    $('#photogrid').html(html)
+  }
+
+</script>
+
+</body>
+</html>
