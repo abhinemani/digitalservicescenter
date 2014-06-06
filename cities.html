@@ -13,7 +13,7 @@
     <link rel='stylesheet' type='text/css' href='css/foundation.css'>
     <link rel='stylesheet' type='text/css' href='css/icons/foundation-icons.css'>
     <link rel='stylesheet' type='text/css' href='http://api.tiles.mapbox.com/mapbox.js/v1.0.0/mapbox.css'  />
-    <link href='http://fonts.googleapis.com/css?family=Raleway:400,700,100,200,300,500,600,800,900' rel='stylesheet' type='text/css'>    <style>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,700,100,200,300,500,600,800,900' rel='stylesheet' type='text/css'>    
     
     <style>
       #map {max-width: 1000px; height: 200px;}
@@ -90,6 +90,7 @@
              <a class="button expand small" href='{{data}}' title='{{data}}'><i class="fi-web size-36"></i> <strong>Data:</strong> Explore Open Data</a>
              
            </li>
+           <li>      <div id="map"></div></li>
           </ul>
      
         </div>
@@ -98,14 +99,6 @@
  </div>  
  
 </script>
-<div class="row">
-  <div class="large-12 columns">
-    <div class="container">
-      <div id="map"></div>
-    </div>
-  </div>
-</div> 
-
 
   <script>  $(document).foundation();
   </script>
