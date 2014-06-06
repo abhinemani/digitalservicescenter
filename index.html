@@ -9,17 +9,16 @@
     <script type='text/javascript' src='js/sheetsee.js'></script>
     <script src="js/foundation.min.js"></script>
     <link rel='stylesheet' type='text/css' href='css/foundation.css'>
+    <link rel='stylesheet' type='text/css' href='http://api.tiles.mapbox.com/mapbox.js/v1.0.0/mapbox.css'  />
+    <style>
+      #map {max-width: 1000px; height: 400px;}
+      .leaflet-popup-content li {list-style:none;}
+      .leaflet-popup-content {width: 102px;}
+      .leaflet-popup-content img {width: 100px;}
+      a {border: none;}
+    </style>
   </head>
-  <style>
-    #Pagination {border-top: 1px solid #efefef; margin: 10px 0px; padding-top: 10px; display: inline-block;}
-    #Pagination a {cursor: hand;}
-    .no-pag {color: #acacac; border: none;}
-    .no-pag:hover {color: #acacac;}
-    input {border: none; border-bottom: 1px solid #333;margin: 10px 0px; width: 200px; font-size: 16px; padding-bottom: 6px;}
-    .tHeader {padding: 8px; font-family: Helvetica Neue; Helvetica, Arial, sans-serif; cursor: hand;}
-    .photo {display: inline-block; float: left; width: 100px;}
-    #photogrid {overflow: auto;}
-  </style>
+
 <body>
 
   <nav class="top-bar" data-topbar>
@@ -54,20 +53,27 @@
         <h3>Tracking open cities</h3>
         <p>Easily find out if your city is open, and if it is, get access to the information it's providing in one, centralized, up-to-date place.</p>
        
-        <!--<div class="row">
+        <div class="row">
         	<div class="large-4 medium-4 columns">
-    		<p><a href="http://foundation.zurb.com/docs">Foundation Documentation</a><br />Everything you need to know about using the framework.</p>
+    		<p><a href="http://foundation.zurb.com/docs">The Data that Matters</a><br />Everything you need to know about using the framework.</p>
     	</div>
         	<div class="large-4 medium-4 columns">
-        		<p><a href="http://github.com/zurb/foundation">Foundation on Github</a><br />Latest code, issue reports, feature requests and more.</p>
+        		<p><a href="http://github.com/zurb/foundation">Emphasis on standards</a><br />Latest code, issue reports, feature requests and more.</p>
         	</div>
         	<div class="large-4 medium-4 columns">
-        		<p><a href="http://twitter.com/foundationzurb">@foundationzurb</a><br />Ping us on Twitter if you have questions. If you build something with this we'd love to see it (and send you a totally boss sticker).</p>
+        		<p><a href="/add">Add your city</a><br />Ping us on Twitter if you have questions. If you build something with this we'd love to see it (and send you a totally boss sticker).</p>
         	</div>        
-				</div>-->
+				</div>
     	</div>
     </div>
-  </div>    
+  </div>
+    <div class="row">
+      <div class="large-12 columns">
+       <div class="container">
+        <div id="map"></div>
+      </div>
+    </div>
+  </div>  
     <div id="photogrid"></div>
     
 </div>
@@ -78,7 +84,7 @@
         <div class="large-12 columns">
           <ul class="pricing-table">
             <li class="title">{{city}}</li>
-            <li class="price"><div class="progress large-# {{status}} round">
+            <li class="price"><div class="progress large-# success round">
               <span class="meter" style="width: {{progress}}%"></span>
             </div></li>
             <li class="description">{{notes}}</li>
@@ -97,13 +103,20 @@
 <script type="text/javascript">
   document.addEventListener('DOMContentLoaded', function() {
   	var URL = "1FhOYwOu1w14e_4qwKLsLoZYpd3hJu8Q3wSiZi5kwFMA"
-  	Tabletop.init( { key: URL, callback: showInfo, simpleSheet: true, orderby: 'name'} )
+  	Tabletop.init( { key: URL, callback: showInfo, simpleSheet: true } )
   })
 
   function showInfo(data) {
     var html = Sheetsee.ich.photogrid({'rows': data})
     $('#photogrid').html(html)
-  }
+       var optionsJSON = ["city"]
+       var template = "<ul><li><h4>{{city}}</h4></li></ul>"
+       var geoJSON = Sheetsee.createGeoJSON(data, optionsJSON)
+       var map = Sheetsee.loadMap("map")
+       Sheetsee.addTileLayer(map, 'examples.map-20v6611k')
+        var markerLayer = Sheetsee.addMarkerLayer(geoJSON, map, template)
+     }
+  </script>
 
 </script>
 
