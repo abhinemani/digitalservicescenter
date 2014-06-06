@@ -24,7 +24,7 @@
   <nav class="top-bar" data-topbar>
     <ul class="title-area">
       <li class="name">
-        <h1><a href="#">Open City Map</a></h1>
+        <h1><a href="#">Digital Cities Map</a></h1>
       </li>
       <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
     </ul>
@@ -53,7 +53,7 @@
         <h3>Tracking open cities</h3>
         <p>Easily find out if your city is open, and if it is, get access to the information it's providing in one, centralized, up-to-date place.</p>
        
-        <div class="row">
+        <!--<div class="row">
         	<div class="large-4 medium-4 columns">
     		<p><a href="http://foundation.zurb.com/docs">The Data that Matters</a><br />Everything you need to know about using the framework.</p>
     	</div>
@@ -63,7 +63,7 @@
         	<div class="large-4 medium-4 columns">
         		<p><a href="/add">Add your city</a><br />Ping us on Twitter if you have questions. If you build something with this we'd love to see it (and send you a totally boss sticker).</p>
         	</div>        
-				</div>
+				</div>-->
     	</div>
     </div>
   </div>
@@ -79,22 +79,23 @@
 </div>
 
 <script id="photogrid" type="text/html">
-  {{#rows}}
-      <div class="row">
+         {{#rows}}      <div class="row">
+ 
+
         <div class="large-12 columns">
           <ul class="pricing-table">
             <li class="title">{{city}}</li>
-            <li class="price"><div class="progress large-# success round">
+            <li class="price"><div class="progress large-# {{status}} round">
               <span class="meter" style="width: {{progress}}%"></span>
             </div></li>
             <li class="description">{{notes}}</li>
-            <li class="cta-button"><a class="button" href='{{data}}'>Data</a><a class="button" href='{{budget}}'>Budget</a><a class="button" href='{{laws}}'>Laws</a><a class="button" href='{{foia}}'>FOIA</a></li>
+            <li class="cta-button"><a class="button" href='{{laws}}'>Laws</a><a class="button" href='{{records}}'>Records</a><a class="button" href='{{services}}'>Services</a><a class="button" href='{{data}}'>Data</a><a class="button" href='{{feedback}}'>Feedback</a></li>
            
           </ul>
      
         </div>
-      </div>
-  {{/rows}}
+  </div>
+  {{/rows}}    
 </script>
 
   <script>  $(document).foundation();
@@ -103,7 +104,7 @@
 <script type="text/javascript">
   document.addEventListener('DOMContentLoaded', function() {
   	var URL = "1FhOYwOu1w14e_4qwKLsLoZYpd3hJu8Q3wSiZi5kwFMA"
-  	Tabletop.init( { key: URL, callback: showInfo, simpleSheet: true } )
+  	Tabletop.init( { key: URL, callback: showInfo, simpleSheet: true, orderby: 'name' } )
   })
 
   function showInfo(data) {
