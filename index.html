@@ -11,6 +11,7 @@
     <script src="js/foundation/foundation.equalizer.js"></script>
     
     <link rel='stylesheet' type='text/css' href='css/foundation.css'>
+    <link rel='stylesheet' type='text/css' href='css/icons/foundation-icons.css'>
     <link rel='stylesheet' type='text/css' href='http://api.tiles.mapbox.com/mapbox.js/v1.0.0/mapbox.css'  />
     <style>
       #map {max-width: 1000px; height: 350px;}
@@ -18,6 +19,7 @@
       .leaflet-popup-content {width: 102px;}
       .leaflet-popup-content img {width: 100px;}
       a {border: none;}
+      li.cta-button a.button.small {width: 60px;}
     </style>
   </head>
 
@@ -89,12 +91,16 @@
 
         <div class="large-4 columns" data-equalizer-watch>
           <ul class="pricing-table">
-            <li class="title">{{city}}</li>
+            <a name="city{{rowNumber}}"></a><li class="title">{{city}}</li>
             <li class="price"><div class="progress large-# {{status}} round">
               <span class="meter" style="width: {{progress}}%"></span>
-            </div></li>
-            <li class="description">{{notes}}</li>
-            <li class="cta-button"><a class="button" href='{{laws}}'>Laws</a><a class="button" href='{{records}}'>Records</a><a class="button" href='{{services}}'>Services</a><a class="button" href='{{data}}'>Data</a><a class="button" href='{{feedback}}'>Feedback</a></li>
+            </div></li>            
+            <li class="cta-button">
+              <a class="button small" href='{{laws}}'><i class="fi-layout size-21"></i></a>
+              <a class="button small" href='{{services}}'><i class="fi-map size-21"></i></a>
+              <a class="button small" href='{{data}}'><i class="fi-graph-trend size-21"></i></a>
+              <a class="button small" href='{{feedback}}'><i class="fi-mobile-signal size-21"></i></a>
+            </li>
            
           </ul>
      
@@ -117,12 +123,12 @@
     var html = Sheetsee.ich.photogrid({'rows': data})
     $('#photogrid').html(html)
     $('#photogrid a').each(function() {
-        if($(this).attr('href') === '' || $(this).text() === '') {
+        if($(this).attr('href') === '' || $(this).text() === 'N/A') {
             $(this).addClass("secondary");
         }
     });
-       var optionsJSON = ["city"]
-       var template = "<ul><li><h4>{{city}}</h4></li></ul>"
+       var optionsJSON = ["city", "rowNumber"]
+       var template = "<ul><li><a href=#city{{rowNumber}}>{{city}}</a></li></ul>"
        var geoJSON = Sheetsee.createGeoJSON(data, optionsJSON)
        var map = Sheetsee.loadMap("map")
        Sheetsee.addTileLayer(map, 'examples.map-20v6611k')
