@@ -14,21 +14,31 @@
     <link rel='stylesheet' type='text/css' href='css/icons/foundation-icons.css'>
     <link rel='stylesheet' type='text/css' href='http://api.tiles.mapbox.com/mapbox.js/v1.0.0/mapbox.css'  />
     <style>
-      #map {max-width: 1000px; height: 350px;}
+      #map {max-width: 1000px; height: 200px;}
       .leaflet-popup-content li {list-style:none;}
       .leaflet-popup-content {width: 102px;}
       .leaflet-popup-content img {width: 100px;}
       a {border: none;}
-      li.cta-button a.button.small {width: 60px;}
+      a.button.expand {margin-bottom: .5rem;}
     </style>
   </head>
 
 <body>
 
+
+
+<div id="photogrid"></div>
+  
+
+</div>
+
+<script id="photogrid" type="text/html">
+
+  {{#rows}}
   <nav class="top-bar" data-topbar>
     <ul class="title-area">
       <li class="name">
-        <h1><a href="#">Digital Cities Map</a></h1>
+        <h1><a href="#">Digital Cities Map: {{city}}</a></h1>
       </li>
       <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
     </ul>
@@ -51,63 +61,49 @@
       </ul>-->
     </section>
   </nav>  
-  <div class="row">
-    <div class="large-12 columns">
-    	<div class="panel">
-        <h3>Connect with your open city</h3>
-        <p>Easily find out if your city is open, and if it is, get access to the information it's providing in one, centralized, up-to-date place.</p>
-       
-        <!--<div class="row">
-        	<div class="large-4 medium-4 columns">
-    		<p><a href="http://foundation.zurb.com/docs">The Data that Matters</a><br />Everything you need to know about using the framework.</p>
-    	</div>
-        	<div class="large-4 medium-4 columns">
-        		<p><a href="http://github.com/zurb/foundation">Emphasis on standards</a><br />Latest code, issue reports, feature requests and more.</p>
-        	</div>
-        	<div class="large-4 medium-4 columns">
-        		<p><a href="/add">Add your city</a><br />Ping us on Twitter if you have questions. If you build something with this we'd love to see it (and send you a totally boss sticker).</p>
-        	</div>        
-				</div>-->
-    	</div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="large-12 columns">
-      <div class="container">
-        <div id="map"></div>
-      </div>
-    </div>
-  </div>
-  <br />  <br />  
-  <div id="photogrid"></div>
   
-
-</div>
-
-<script id="photogrid" type="text/html">
        <div class="row" data-equalizer>
- 
-         {{#rows}}     
+   
 
-        <div class="large-4 columns" data-equalizer-watch>
+        <div class="large-12 columns" data-equalizer-watch>
           <ul class="pricing-table">
-            <a name="city{{rowNumber}}"></a><li class="title">{{city}}</li>
             <li class="price"><div class="progress large-# {{status}} round">
               <span class="meter" style="width: {{progress}}%"></span>
-            </div></li>            
-            <li class="cta-button">
-              <a class="button small" href='{{laws}}'><i class="fi-layout size-21"></i></a>
-              <a class="button small" href='{{services}}'><i class="fi-map size-21"></i></a>
-              <a class="button small" href='{{data}}'><i class="fi-graph-trend size-21"></i></a>
-              <a class="button small" href='{{feedback}}'><i class="fi-mobile-signal size-21"></i></a>
+            </div></li>
+            <a name="city{{rowNumber}}"></a>
+            <li class="title">Learn about {{city}}</li>
+       
+            <li>
+              <a  class="button expand small" title="Bills"  href='{{bills}}'><i class="fi-layout size-36"></i> <strong>Bills:</strong> What are the city's laws?</a>
+              <a class="button expand small" href='{{bullets}}'>
+                <i class="fi-map size-36"></i> <strong>BULLETS:</strong> What's safety like throughout the city?</a>
+              <a class="button expand small" href='{{budgets}}'><i class="fi-graph-trend size-36"></i> <strong>BUDGETS:</strong> What does the city spend?</a>
+              <a class="button expand small" href='{{buses}}'><i class="fi-compass size-36"></i> <strong>BUSES:</strong> How do I get around town?</a>
             </li>
-           
+            <li class="title">Interact with {{city}}</li>
+           <li>
+             <a class="button expand small" href='{{services}}' title='Find a Social Service'><i class="fi-torsos-male-female size-36"></i> <strong>211:</strong> Find a Social Service</a>
+             <a class="button expand small" href='{{issues}}' title='Report an Issue'><i class="fi-trash size-36"></i> <strong>311:</strong> Report an Issue</a>
+             <a class="button expand small" href='{{questions}}' title='Ask a question'><i class="fi-magnifying-glass size-36"></i> <strong>411:</strong> Ask a Question</a>
+             <a class="button expand small" href='{{data}}' title='{{data}}'><i class="fi-web size-36"></i> <strong>Data:</strong> Explore Open Data</a>
+             
+           </li>
           </ul>
      
         </div>
  
-  {{/rows}}   </div>  
+  {{/rows}}   
+ </div>  
+ 
 </script>
+<div class="row">
+  <div class="large-12 columns">
+    <div class="container">
+      <div id="map"></div>
+    </div>
+  </div>
+</div> 
+
 
   <script>  $(document).foundation();
   </script>
@@ -120,16 +116,20 @@
   
 
   function showInfo(data) {
-    var html = Sheetsee.ich.photogrid({'rows': data})
+    var singlecity = window.location.hash.substr(1);
+    var singlecitydata = Sheetsee.getMatches(data, singlecity, "city")
+    var html = Sheetsee.ich.photogrid({'rows': singlecitydata})
     $('#photogrid').html(html)
     $('#photogrid a').each(function() {
         if($(this).attr('href') === '' || $(this).text() === 'N/A') {
             $(this).addClass("secondary");
         }
     });
+    
+    
        var optionsJSON = ["city", "rowNumber"]
        var template = "<ul><li><a href=#city{{rowNumber}}>{{city}}</a></li></ul>"
-       var geoJSON = Sheetsee.createGeoJSON(data, optionsJSON)
+       var geoJSON = Sheetsee.createGeoJSON(singlecitydata, optionsJSON)
        var map = Sheetsee.loadMap("map")
        Sheetsee.addTileLayer(map, 'examples.map-20v6611k')
         var markerLayer = Sheetsee.addMarkerLayer(geoJSON, map, template)
