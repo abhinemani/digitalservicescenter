@@ -37,13 +37,10 @@
 
 </div>
 
-<script id="photogrid" type="text/html">
-
-  {{#rows}}
   <nav class="top-bar" data-topbar>
     <ul class="title-area">
       <li class="name">
-        <h1><a href="cities.html/#{{city}}">{{city}} Digital Services</a></h1>
+        <h1><a href="cities.html/#{{city}}">City Digital Services</a></h1>
       </li>
       <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
     </ul>
@@ -67,10 +64,10 @@
       </ul>-->
     </section>
   </nav>  
-  
-       <div class="row" data-equalizer>
-   
+  <script id="photogrid" type="text/html">
 
+   {{#rows}} 
+       <div class="row" data-equalizer>
         <div class="large-12 columns" data-equalizer-watch>
           <ul class="pricing-table">
             <li class="price"><div class="progress large-# {{status}} round">
@@ -122,7 +119,7 @@
         }
     });
     
-    $('nav.top-bar h1').html('<a href="cities.html/#' + singlecity + '">' + singlecity + ' Digital</a>')
+    $('nav.top-bar h1').html('<a href="cities.html/#' + singlecity + '">' + singlecity + ' Digital Services</a>')
     
        var optionsJSON = ["city", "rowNumber"]
        var template = "<ul><li><a href=#city{{rowNumber}}>{{city}}</a></li></ul>"
