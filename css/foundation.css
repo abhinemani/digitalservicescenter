@@ -1158,7 +1158,7 @@ button, .button {
     border-color: #007095;
     color: white;
     cursor: default;
-    opacity: 0.7;
+    opacity: 0.5;
     box-shadow: none; }
     button.disabled:hover, button.disabled:focus, button[disabled]:hover, button[disabled]:focus, .button.disabled:hover, .button.disabled:focus, .button[disabled]:hover, .button[disabled]:focus {
       background-color: #007095; }
