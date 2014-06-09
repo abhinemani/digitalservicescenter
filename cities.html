@@ -122,7 +122,7 @@
         }
     });
     
-    $('nav.top-bar h1').text(singlecity + 'Digital')
+    $('nav.top-bar h1').html('<a href="cities.html/#' + singlecity + '">' + singlecity + ' Digital</a>')
     
        var optionsJSON = ["city", "rowNumber"]
        var template = "<ul><li><a href=#city{{rowNumber}}>{{city}}</a></li></ul>"
