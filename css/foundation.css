@@ -2143,6 +2143,9 @@ div.switch {
     font-weight: normal;
     font-size: 1rem;
     font-family: 'Raleway', "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif; }
+  .pricing-table li.title a:hover {
+    text-decoration: underline;
+  }
   .pricing-table .price {
     background-color: #f6f6f6;
     padding: 0.9375rem 1.25rem;
