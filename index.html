@@ -152,7 +152,7 @@
     var template = "<ul><li><a href='cities.html#{{city}}'>{{city}}</li></ul>"
     var geoJSON = Sheetsee.createGeoJSON(data, optionsJSON)
     var map = Sheetsee.loadMap("map")
-    Sheetsee.addTileLayer(map, 'examples.map-20v6611k')
+    Sheetsee.addTileLayer(map, 'jllord.n7aml2bc')
     var markerLayer = Sheetsee.addMarkerLayer(geoJSON, map, template)
     $('#photogrid a').each(function() {
         if($(this).attr('href') === '' || $(this).text() === 'N/A') {
